@@ -1,28 +1,28 @@
 ﻿using System;
 using Excecoes.Entities;
+using Excecoes.Entities.Exceptions;
 
-// Solicita o número do quarto
-Console.Write("Room number: ");
-int number = int.Parse(Console.ReadLine());
 
-// Solicita a data de check-in
-Console.Write("Check-in date (dd/MM/yyyy): ");
-DateTime checkIn = DateTime.Parse(Console.ReadLine());
-
-// Solicita a data de check-out
-Console.Write("Check-out date (dd/MM/yyyy): ");
-DateTime checkOut = DateTime.Parse(Console.ReadLine());
-
-// Verifica se a data de check-out é anterior ou igual à data de check-in
-if (checkOut <= checkIn)
+try
 {
-    Console.WriteLine("Error in reservation: Check-out date must be after check-in date");
-}
-else
-{
+    // Solicita o número do quarto
+    Console.Write("Room number: ");
+    int number = int.Parse(Console.ReadLine());
+
+    // Solicita a data de check-in
+    Console.Write("Check-in date (dd/MM/yyyy): ");
+    DateTime checkIn = DateTime.Parse(Console.ReadLine());
+
+    // Solicita a data de check-out
+    Console.Write("Check-out date (dd/MM/yyyy): ");
+    DateTime checkOut = DateTime.Parse(Console.ReadLine());
+
+
     // Cria uma nova reserva
     Reservation reservation = new Reservation(number, checkIn, checkOut);
     Console.WriteLine("Reservation: " + reservation);
+
+
     Console.WriteLine();
 
     // Solicita dados para atualizar a reserva
@@ -32,16 +32,24 @@ else
     Console.Write("Check-out date (dd/MM/yyyy): ");
     checkOut = DateTime.Parse(Console.ReadLine());
 
-    string error = reservation.UpdateDates(checkIn, checkOut);
-    if (error != null)
-    {
-        Console.WriteLine("Error in reservation: " + error);
-    }
-    else
-    {
-        Console.WriteLine("Reservation: " + reservation);
-    }
+    reservation.UpdateDates(checkIn, checkOut);
+    Console.WriteLine("Reservation: " + reservation);
 
 }
+
+catch (DomainException e)
+{
+    Console.WriteLine("Error in reservation: " + e.Message);
+}
+catch(FormatException e){
+    Console.WriteLine("Format error: " + e.Message);
+}
+catch(Exception e)
+{
+    Console.WriteLine("Unexpected error: " + e.Message);
+}
+
+
+
 
 
