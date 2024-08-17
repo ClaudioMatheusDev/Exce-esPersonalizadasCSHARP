@@ -30,6 +30,12 @@ namespace Excecoes.Entities
 
         }//PEGANDO O TEMPO QUE SOBRA DO CHECKIN MENOS O CHECKOUT
 
+        public void UpdateDates(DateTime checkIn, DateTime checkOut)
+        {
+            CheckIn = checkIn;
+            CheckOut = checkOut;
+        } //OPERAÇÃO PARA ATUALIZAR A DATA DE RESERVA
+
         public override string ToString()
         {
             return "Room "
