@@ -13,28 +13,28 @@ namespace Excecoes.Entities
         public DateTime CheckOut { get; set; }
 
 
-        public Reservation() { 
-        }
+        public Reservation() {
+        }// Construtor sem parâmetros
 
         public Reservation(int roomNumber, DateTime checkIn, DateTime checkOut)
         {
             RoomNumber = roomNumber;
             CheckIn = checkIn;
             CheckOut = checkOut;
-        }//CONSTRUTORES
+        }//Construtor com parâmetros
 
         public int Duration()
         {
             TimeSpan duration = CheckOut.Subtract(CheckIn);
             return (int)duration.TotalDays; //RETORNANDO A DATA EM DIAS
 
-        }//PEGANDO O TEMPO QUE SOBRA DO CHECKIN MENOS O CHECKOUT
+        }// Método que calcula a duração da reserva em dias
 
         public void UpdateDates(DateTime checkIn, DateTime checkOut)
         {
             CheckIn = checkIn;
             CheckOut = checkOut;
-        } //OPERAÇÃO PARA ATUALIZAR A DATA DE RESERVA
+        } // Método para atualizar as datas de check-in e check-out
 
         public override string ToString()
         {
@@ -47,6 +47,6 @@ namespace Excecoes.Entities
                 + ", "
                 + Duration()
                 + " nights";
-        }//RETORNANDO O NÚMERO DO QUARTO, DATA DE CHECKIN, CHECKOUT E A DURAÇÃO DE TEMPO ENTRE ELES.
+        }// Sobrescrita do método ToString para exibir as informações da reserva
     }
 }
