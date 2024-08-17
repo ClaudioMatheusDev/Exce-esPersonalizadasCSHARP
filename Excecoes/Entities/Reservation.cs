@@ -30,10 +30,23 @@ namespace Excecoes.Entities
 
         }// Método que calcula a duração da reserva em dias
 
-        public void UpdateDates(DateTime checkIn, DateTime checkOut)
+        public string UpdateDates(DateTime checkIn, DateTime checkOut)
         {
+            DateTime now = DateTime.Now;
+            if (checkIn < now || checkOut < now)
+            {
+                return "Reservation dates for update must be future dates";
+            }//VERIFICADO SE AS DATAS SÃO DATAS FUTURAS
+            else if (checkOut <= checkIn)
+            {
+               return "Check-out date must be after check-in date";
+            }//VERIFICADO SE AS DATAS SÃO DATAS FUTURAS
+
+
             CheckIn = checkIn;
             CheckOut = checkOut;
+            return null; //Se passar dos dois IFS, cai nesse NULL, retornando que NÃO teve erros
+
         } // Método para atualizar as datas de check-in e check-out
 
         public override string ToString()
